@@ -1,4 +1,4 @@
-update=Wed 12 Oct 2016 00:11:13 BST
+update=Thursday, 20 October 2016 'pmt' 22:58:46
 version=1
 last_client=kicad
 [pcbnew]
@@ -42,3 +42,4 @@ LibName10=libs/r
 LibName11=libs/pwr
 LibName12=libs/power
 LibName13=libs/mcp1700
+LibName14=libs/q_nmos_gsd
