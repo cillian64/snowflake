@@ -1,11 +1,9 @@
-# Yuletronics: Electronics Club Project Michalmas 2016
+# Snowflake: David's "Yuletronics" project.
 
-This repository contains the example Yuletronics project for Electronics Club. 
-You can either use git to clone it, or simply download it 
-[here](https://github.com/adamgreig/yuletronics/archive/master.zip).
+A christmas decoration shaped like a snowflake, with beautiful twinky white
+LEDs.
 
-You'll need KiCAD to open and edit the PCB: [download it 
-here](http://kicad-pcb.org/). If you can easily get a nightly build, they have 
-a few nice new features.
+Based on [Adam Greig's Christmas
+Tree](https://github.com/adamgreig/yuletronics/)
 
-![3d render](pcb/yuletronics.png)
+Made in [KiCAD 4.0.4](http://kicad-pcb.org/).
