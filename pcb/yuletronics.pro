@@ -1,4 +1,4 @@
-update=Tuesday, 01 November 2016 'amt' 01:16:22
+update=Sunday, 06 November 2016 'pmt' 23:02:16
 version=1
 last_client=kicad
 [pcbnew]
@@ -43,3 +43,4 @@ LibName11=libs/mcp1700
 LibName12=libs/q_nmos_gsd
 LibName13=libs/dpdt
 LibName14=libs/tlv61220
+LibName15=/Users/dwt27/git/agg-kicad/lib/ui/switch

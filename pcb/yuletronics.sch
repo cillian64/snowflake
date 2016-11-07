@@ -13,6 +13,7 @@ LIBS:mcp1700
 LIBS:q_nmos_gsd
 LIBS:dpdt
 LIBS:tlv61220
+LIBS:switch
 LIBS:yuletronics-cache
 EELAYER 25 0
 EELAYER END
