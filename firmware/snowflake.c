@@ -52,10 +52,16 @@ static void gpio_setup(void)
     }
 }
 
-static void wait(void)
+static void shortwait(void)
 {
     volatile int i;
-    for(i=0; i<20000; i++);
+    for(i=0; i<1000; i++);
+}
+
+static void longwait(void)
+{
+    volatile int i;
+    for(i=0; i<50000; i++);
 }
 
 int main(void)
@@ -65,43 +71,44 @@ int main(void)
     while(true)
     {
         TURNON(1);
-        TURNON(2);
-        TURNON(3);
-        TURNON(4);
-        TURNON(5);
-        TURNON(6);
-        TURNON(7);
-        TURNON(8);
-        wait();
+        shortwait();
         TURNOFF(1);
-        TURNOFF(2);
-        TURNOFF(3);
-        TURNOFF(4);
-        TURNOFF(5);
-        TURNOFF(6);
-        TURNOFF(7);
-        TURNOFF(8);
-        wait();
+        longwait();
 
-//        TURNON(5);
-//        TURNON(3);
-//        TURNON(7);
-//        wait();
-//        TURNOFF(1);
-//        TURNOFF(5);
-//        wait();
-//        TURNOFF(3);
-//        TURNOFF(7);
-//        TURNON(2);
-//        TURNON(8);
-//        wait();
-//        TURNOFF(2);
-//        TURNOFF(8);
-//        TURNON(4);
-//        TURNON(6);
-//        wait();
-//        TURNOFF(4);
-//        TURNOFF(6);
+        TURNON(4);
+        shortwait();
+        TURNOFF(4);
+        longwait();
+
+        TURNON(6);
+        shortwait();
+        TURNOFF(6);
+        longwait();
+
+        TURNON(2);
+        shortwait();
+        TURNOFF(2);
+        longwait();
+
+        TURNON(8);
+        shortwait();
+        TURNOFF(8);
+        longwait();
+
+        TURNON(5);
+        shortwait();
+        TURNOFF(5);
+        longwait();
+
+        TURNON(7);
+        shortwait();
+        TURNOFF(7);
+        longwait();
+
+        TURNON(3);
+        shortwait();
+        TURNOFF(3);
+        longwait();
     }
     return 0;
 }
