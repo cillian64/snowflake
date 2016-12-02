@@ -55,7 +55,7 @@ static void gpio_setup(void)
 static void shortwait(void)
 {
     volatile int i;
-    for(i=0; i<1000; i++);
+    for(i=0; i<3000; i++);
 }
 
 static void longwait(void)
