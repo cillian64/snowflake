@@ -1,8 +1,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/timer.h>
 
 #define LED1 GPIO0
 #define LED2 GPIO1
@@ -52,21 +54,55 @@ static void gpio_setup(void)
     }
 }
 
+void tim14_isr(void)
+{
+    // Clear interrupt flag
+    TIM_SR(TIM14) &= ~TIM_SR_UIF;
+}
+
 static void shortwait(void)
 {
-    volatile int i;
-    for(i=0; i<3000; i++);
+    // About 0.25ms
+    timer_set_period(TIM14, 1);
+    timer_enable_counter(TIM14);
+    __asm__("wfi");
+    timer_disable_counter(TIM14);
 }
 
 static void longwait(void)
 {
-    volatile int i;
-    for(i=0; i<50000; i++);
+    // About 100ms
+    timer_set_period(TIM14, 400u);
+    timer_enable_counter(TIM14);
+    __asm__("wfi");
+    timer_disable_counter(TIM14);
+}
+
+static void longlongwait(void)
+{
+    // About 1000ms
+    timer_set_period(TIM14, 4000u);
+    timer_enable_counter(TIM14);
+    __asm__("wfi");
+    timer_disable_counter(TIM14);
 }
 
 int main(void)
 {
     gpio_setup();
+
+    // Setup TIM14 for sleep wakeups
+    rcc_periph_clock_enable(RCC_TIM14);
+    timer_reset(TIM2);
+    timer_set_mode(TIM14, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE,
+                   TIM_CR1_DIR_UP);
+    // PCLK is running at 8MHz from HSI
+    // Prescaler: divide by 2000 for timer at ~4kHz
+    timer_set_prescaler(TIM14, 1999u);
+    nvic_enable_irq(NVIC_TIM14_IRQ);
+    timer_enable_irq(TIM14, TIM_DIER_UIE);
+    timer_enable_update_event(TIM14);
+    timer_disable_counter(TIM14);
 
     while(true)
     {
@@ -109,6 +145,8 @@ int main(void)
         shortwait();
         TURNOFF(3);
         longwait();
+
+        longlongwait();
     }
     return 0;
 }
